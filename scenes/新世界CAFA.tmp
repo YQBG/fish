@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgg1ci133c3v3"]
+
+[ext_resource type="TileSet" uid="uid://dxjmvx0x32ekh" path="res://objects/世界.tres" id="2_u1n2a"]
+[ext_resource type="Script" path="res://scripts/新世界.gd" id="2_vtkgp"]
+[ext_resource type="PackedScene" uid="uid://bioysdsfdbndb" path="res://scenes/player.tscn" id="3_spekc"]
+
+[sub_resource type="Gradient" id="Gradient_7lcji"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.354497, 0.511464, 0.964727, 1)
+colors = PackedColorArray(0.207843, 0.156863, 0.843137, 1, 0.636892, 0.445732, 5.77569e-07, 1, 0, 0.913725, 0, 1, 0.627451, 0, 0.101961, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qfmu8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vokpj"]
+color_ramp = SubResource("Gradient_7lcji")
+noise = SubResource("FastNoiseLite_qfmu8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r2muy"]
+frequency = 0.35
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lined"]
+noise = SubResource("FastNoiseLite_r2muy")
+
+[node name="新世界" type="Node2D"]
+script = ExtResource("2_vtkgp")
+noise_height_text = SubResource("NoiseTexture2D_vokpj")
+noise_tree_text = SubResource("NoiseTexture2D_lined")
+
+[node name="Water" type="TileMapLayer" parent="."]
+z_index = -1
+y_sort_enabled = true
+tile_set = ExtResource("2_u1n2a")
+
+[node name="Ground_1" type="TileMapLayer" parent="."]
+z_index = -1
+tile_set = ExtResource("2_u1n2a")
+
+[node name="Ground_2" type="TileMapLayer" parent="."]
+z_index = -1
+tile_set = ExtResource("2_u1n2a")
+
+[node name="Cliff" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_set = ExtResource("2_u1n2a")
+
+[node name="Environment" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_set = ExtResource("2_u1n2a")
+
+[node name="Player" parent="." instance=ExtResource("3_spekc")]
+position = Vector2(571, 327)
+
+[connection signal="completed" from="." to="." method="_on_completed"]

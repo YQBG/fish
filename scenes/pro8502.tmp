@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://crcqj5oyxxklm"]
+
+[ext_resource type="Script" path="res://scripts/progress_bar.gd" id="1_4j4gn"]
+[ext_resource type="Texture2D" uid="uid://1ay45hvlrc7h" path="res://assets/进度条/bg.png" id="1_k2lah"]
+[ext_resource type="Texture2D" uid="uid://p1wma2vm2u3n" path="res://assets/进度条/progress.png" id="2_0l3lm"]
+
+[node name="ProgressBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 302.0
+offset_bottom = 33.0
+script = ExtResource("1_4j4gn")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 32.0
+texture_under = ExtResource("1_k2lah")
+texture_progress = ExtResource("2_0l3lm")
+
+[node name="ProgressVal" type="Label" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 3.0
+offset_right = 340.0
+offset_bottom = 26.0
