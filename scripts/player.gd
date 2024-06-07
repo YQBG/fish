@@ -4,34 +4,23 @@ extends CharacterBody2D
 const SPEED = 5000
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var camera_2d: Camera2D = $Camera2D
-#钓鱼状态
-var FISNING: bool = false
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector("left","right","up","down")
-	if Input.is_action_pressed("fishing_out"):
-		FISNING = false
-		animated_sprite.play("static")
 		
-		
-	if !FISNING:
-		if Input.is_action_pressed("up"):
-			animated_sprite.play("up")
-		elif Input.is_action_pressed("down"):
-			animated_sprite.play("down")	
-		elif Input.is_action_pressed("left"):
-			animated_sprite.flip_h = true
-			animated_sprite.play("left")
-		elif Input.is_action_pressed("right"):
-			animated_sprite.flip_h = false
-			animated_sprite.play("right")
-		elif Input.is_action_pressed("fishing"):
-			FISNING = true
+	if Input.is_action_pressed("up"):
+		animated_sprite.play("up")
+	elif Input.is_action_pressed("down"):
+		animated_sprite.play("down")	
+	elif Input.is_action_pressed("left"):
+		animated_sprite.flip_h = true
+		animated_sprite.play("left")
+	elif Input.is_action_pressed("right"):
+		animated_sprite.flip_h = false
+		animated_sprite.play("right")
 			
-		velocity = direction * SPEED * delta
-		move_and_slide()
-	else :
-		animated_sprite.play("fish")	
+	velocity = direction * SPEED * delta
+	move_and_slide()
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("zoom_in"):
